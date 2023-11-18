@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot-Sandesh</title>
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+  <div id="chat-container">
+    <div id="chat-messages">
+      <!-- This is where you would embed dynamic content using EJS syntax -->
+      <% chatMessages.forEach((message) => { %>
+        <div class="message <%= message.isUser ? 'user-message' : 'bot-message' %>">
+          <strong><%= message.sender %>:</strong> <%= message.text %>
+        </div>
+      <% }); %>
+    </div>
+    <div style="display: flex; align-items: center;">
+      <input type="text" id="message-input" placeholder="Type your message...">
+      <button id="send-button" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+  <script src="/scripts/app.js"></script>
+</body>
+</html>
