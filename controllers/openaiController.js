@@ -1,4 +1,3 @@
-
 const axios = require('axios');
 
 const openaiController = {
@@ -8,20 +7,24 @@ const openaiController = {
         'https://api.openai.com/v1/engines/davinci-codex/completions',
         {
           prompt: userMessage,
-          max_tokens: 50, // Adjust as needed
+          max_tokens: 50,
         },
         {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer YOUR_OPENAI_API_KEY`,
+            'Authorization': process.env.OPENAI_API_KEY,
           },
         }
       );
 
+      if (!response.data.choices || response.data.choices.length === 0) {
+        throw new Error('Empty response from OpenAI API');
+      }
+
       const chatbotResponse = response.data.choices[0].text.trim();
       return chatbotResponse;
     } catch (error) {
-      console.error('Error generating chatbot response:', error);
+      console.error('Error generating chatbot response:', error.message);
       throw error;
     }
   },

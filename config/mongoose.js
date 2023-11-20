@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 // Connecting to the MongoDB database using the provided connection string
-mongoose.connect('mongodb+srv://manojpant097:bambambhole123@cluster0.oevgklo.mongodb.net/?retryWrites=true&w=majority');
+mongoose.connect(process.env.MONGODB_URI);
 
 // Getting the default connection
 const db = mongoose.connection;
